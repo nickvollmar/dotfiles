@@ -1,0 +1,87 @@
+# DESCRIPTION:
+#
+#   A fancy Bash prompt, including the following details:
+#    * Python virtualenv, if any
+#    * the branch/status of the current git repository
+#    * the exit code of the last command
+#
+# USAGE:
+#
+#   Source this file from your .bash_profile or .bashrc
+#
+# LINEAGE:
+#
+#   Based on:
+#
+#       https://gist.github.com/mkohler/4597990
+
+
+# Save the old value of $PROMPT_COMMAND in case it contains anything, so we can
+# continue to invoke it.
+#
+# Declare this variable readonly so this file can't be sourced multiple times.
+# That would cause an infinite loop.
+declare -r __old_prompt_command="$PROMPT_COMMAND"
+
+__new_prompt_command() {
+  declare -r lastexit="$?"
+
+  declare -r red="\[$(tput setaf 1)\]"
+  declare -r green="\[$(tput setaf 2)\]"
+  declare -r yellow="\[$(tput setaf 3)\]"
+  declare -r magenta="\[$(tput setaf 5)\]"
+  declare -r nocolor="\[$(tput sgr0)\]"
+
+  local prompt_venv=""
+  local prompt_git_branch=""
+  local prompt_symcolor="$nocolor"
+
+  if [[ -n $VIRTUAL_ENV ]]; then
+    prompt_venv="$magenta($(basename $VIRTUAL_ENV))$nocolor "
+  fi
+
+  declare -r git_status="$(git status -unormal 2>&1)"
+  if [[ $? -eq 0 ]]; then
+    local gitcolor="$nocolor"
+    if [[ $git_status =~ "working tree clean" ]]; then
+      gitcolor="$green"
+    elif [[ $git_status =~ "nothing added to commit but untracked files present" ]]; then
+      gitcolor="$red"
+    elif [[ $git_status =~ "Changes to be committed" ]]; then
+      gitcolor="$yellow"
+    fi
+
+    # Set arrow icon based on status against remote.
+    local remote=""
+    local remote_pattern="Your branch is ([^$IFS]*) of"
+    local diverge_pattern="Your branch and ([^$IFS]*) have diverged"
+    if [[ $git_status =~ $remote_pattern ]]; then
+      if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
+        remote="↑"
+      else
+        remote="↓"
+      fi
+    elif [[ $git_status =~ $diverge_pattern ]]; then
+      remote="↕"
+    fi
+
+    # Get the name of the branch.
+    local branch=""
+    local branch_pattern="^On branch ([^$IFS]*)"
+    if [[ $git_status =~ $branch_pattern ]]; then
+      branch="${BASH_REMATCH[1]}"
+    fi
+
+    prompt_git_branch=" $gitcolor($branch$remote)$nocolor"
+  fi
+
+  if [[ $lastexit -ne 0 ]]; then
+    prompt_symcolor="$red"
+  fi
+
+  eval "$__old_prompt_command"
+
+  PS1="$nocolor\\n$prompt_venv\u@\h:\w$prompt_git_branch\\n$prompt_symcolor\\\$$nocolor "
+}
+
+PROMPT_COMMAND=__new_prompt_command
