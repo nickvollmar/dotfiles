@@ -40,21 +40,28 @@ __new_prompt_command() {
     prompt_venv="$magenta($(basename $VIRTUAL_ENV))$nocolor "
   fi
 
-  declare -r git_status="$(git status -unormal 2>&1)"
+  # declare -r git_status="$(...)" always has exit code 0
+  local git_status
+  git_status="$(git status -unormal 2>&1)"
   if [[ $? -eq 0 ]]; then
-    local gitcolor="$nocolor"
-    if [[ $git_status =~ "working tree clean" ]]; then
+    declare -r git_status
+
+    local gitcolor
+    declare -r clean="working tree clean"
+    declare -r untracked="nothing added to commit but untracked files present"
+    if [[ $git_status =~ $clean ]]; then
       gitcolor="$green"
-    elif [[ $git_status =~ "nothing added to commit but untracked files present" ]]; then
+    elif [[ $git_status =~ $untracked ]]; then
       gitcolor="$red"
-    elif [[ $git_status =~ "Changes to be committed" ]]; then
+    else
+      # "Changes not staged for commit", "Changes to be committed"
       gitcolor="$yellow"
     fi
 
     # Set arrow icon based on status against remote.
     local remote=""
-    local remote_pattern="Your branch is ([^$IFS]*) of"
-    local diverge_pattern="Your branch and ([^$IFS]*) have diverged"
+    declare -r remote_pattern="Your branch is ([^$IFS]*) of"
+    declare -r diverge_pattern="Your branch and ([^$IFS]*) have diverged"
     if [[ $git_status =~ $remote_pattern ]]; then
       if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
         remote="↑"
@@ -67,7 +74,7 @@ __new_prompt_command() {
 
     # Get the name of the branch.
     local branch=""
-    local branch_pattern="^On branch ([^$IFS]*)"
+    declare -r branch_pattern="^On branch ([^$IFS]*)"
     if [[ $git_status =~ $branch_pattern ]]; then
       branch="${BASH_REMATCH[1]}"
     fi
