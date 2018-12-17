@@ -15,7 +15,6 @@
 #
 #       https://gist.github.com/mkohler/4597990
 
-
 # Save the old value of $PROMPT_COMMAND in case it contains anything, so we can
 # continue to invoke it.
 #
@@ -75,11 +74,17 @@ __new_prompt_command() {
     # Get the name of the branch.
     local branch=""
     declare -r branch_pattern="^On branch ([^$IFS]*)"
-    if [[ $git_status =~ $branch_pattern ]]; then
+    declare -r head_detached="^HEAD detached at ([^$IFS]*)"
+    if [[ $git_status =~ $branch_pattern ]] || [[ $git_status =~ $head_detached ]]; then
       branch="${BASH_REMATCH[1]}"
     fi
 
-    prompt_git_branch=" $gitcolor($branch$remote)$nocolor"
+    local detached=""
+    if [[ $git_status =~ $head_detached ]]; then
+      detached="detached: "
+    fi
+
+    prompt_git_branch=" $gitcolor($detached$branch$remote)$nocolor"
   fi
 
   if [[ $lastexit -ne 0 ]]; then
