@@ -1,0 +1,27 @@
+{
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 17,
+    "editor.rulers": [78],
+    "editor.scrollBeyondLastLine": false,
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "files.insertFinalNewline": true,
+    "editor.minimap.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
+    "gitlens.hovers.enabled": false,
+    "gitlens.statusBar.enabled": false,
+    "[plaintext]": {
+        "editor.wordBasedSuggestions": false,
+        "editor.quickSuggestions": false
+    },
+    "window.zoomLevel": 0,
+    "terraform.telemetry.enabled": false,
+    "terraform.codelens.enabled": false,
+    "explorer.confirmDelete": false
+}
