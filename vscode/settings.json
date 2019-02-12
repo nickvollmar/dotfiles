@@ -23,5 +23,6 @@
     "window.zoomLevel": 0,
     "terraform.telemetry.enabled": false,
     "terraform.codelens.enabled": false,
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "files.trimTrailingWhitespace": true
 }
