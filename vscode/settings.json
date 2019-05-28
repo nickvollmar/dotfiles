@@ -24,5 +24,7 @@
     "terraform.telemetry.enabled": false,
     "terraform.codelens.enabled": false,
     "explorer.confirmDelete": false,
-    "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true,
+    "go.useLanguageServer": true,
+    "editor.suggest.snippetsPreventQuickSuggestions": false
 }
