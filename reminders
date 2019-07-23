@@ -1,0 +1,11 @@
+# Usage: source this file
+
+open_ports() {
+  # https://apple.stackexchange.com/a/117648
+  echo "sudo lsof -PiTCP -sTCP:LISTEN"
+}
+
+purge_dns_cache() {
+  # https://help.dreamhost.com/hc/en-us/articles/214981288-Flushing-your-DNS-cache-in-Mac-OS-X-and-Linux
+  echo "sudo bash -c 'killall -HUP mDNSResponder && killall mDNSResponderHelper && dscacheutil -flushcache'"
+}
