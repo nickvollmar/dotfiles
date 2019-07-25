@@ -11,9 +11,19 @@
 #
 # LINEAGE:
 #
-#   Based on:
+#   Here is the lineage based on Github "forked from" links.
+#   The first is this file's direct predecessor, the second is the one from
+#   which the first was forked, and so on. If a file has non-fork attributions,
+#   these are noted directly below it, offset by ` -`.
 #
 #       https://gist.github.com/mkohler/4597990
+#         - http://opinionated-programmer.com/2011/01/colorful-bash-prompt-reflecting-git-status/
+#       https://gist.github.com/insin/1425703
+#       https://gist.github.com/woods/31967
+#         - "Based on work by halbtuerke and lakiolen."
+#       https://gist.github.com/halbtuerke/31934
+#       https://gist.github.com/augustjoki/31867
+#       https://gist.github.com/filipsalomonsson/31675
 
 # Only do this if __old_prompt_command hasn't been set, to make `source`
 # idempotent
