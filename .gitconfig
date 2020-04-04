@@ -1,9 +1,8 @@
-[core]
-excludesfile = ~/.gitignore_global
-
 [alias]
-lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-poh = push origin HEAD
-co = checkout
-cb = checkout -b
-st = status
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	com = !git checkout master && git fetch && git reset --hard origin/master
+	co = checkout
+	cb = checkout -b
+	poh = push origin HEAD
+	st = status
+	alt = !gitalt.sh
