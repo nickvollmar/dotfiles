@@ -23,11 +23,11 @@ for arg in "$@"; do
   fi
 
   if [[ $arg = "" ]]; then
-    printf "''"
+    printf "%s" "''"
   elif [[ $arg =~ [^a-zA-Z0-9_@%+=:,./-] ]]; then
     printf "'%s'" "${arg//'/'\"'\"'}"  # replace ' by '"'"'
   else
-    printf "$arg"
+    printf "%s" "$arg"
   fi
 done
 printf "\n"
