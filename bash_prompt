@@ -32,7 +32,7 @@ if [[ -z "${__old_prompt_command+isset}" ]]; then
   # Save the old value of $PROMPT_COMMAND in case it contains anything, so we can
   # continue to invoke it.
   #
-  # Declare this variable readonly so this file can't be sourced multiple times.
+  # Declare this variable readonly so this file can't accidentally source itself.
   # That would cause an infinite loop.
   declare -r __old_prompt_command="$PROMPT_COMMAND"
 
@@ -99,6 +99,7 @@ if [[ -z "${__old_prompt_command+isset}" ]]; then
       fi
 
       prompt_git_branch=" $gitcolor($detached$branch$remote)$nocolor"
+      prompt_git_branch="${prompt_git_branch/$/\\$}"
     fi
 
     if [[ $lastexit -ne 0 ]]; then

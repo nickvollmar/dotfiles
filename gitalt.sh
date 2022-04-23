@@ -14,15 +14,16 @@
 #   [alias]
 #   alt = !gitalt.sh
 
-if ! (output=$(git status --porcelain) && [ -z "$output" ]); then
+if ! (output=$(git status --porcelain --untracked-files=no) && [ -z "$output" ]); then
   echo "$0: git status is unclean, not making alt branch"
   exit 1
 fi
 
 orig_branch="$(git rev-parse --abbrev-ref HEAD)"
-alt="$orig_branch"
+alt="$orig_branch--$(date -u '+%Y-%m-%d')"
 while git rev-parse -q --verify "$alt" >/dev/null; do
   alt="${alt}-alt"
 done
+
 echoval git checkout -b "$alt"
 echoval git checkout "$orig_branch"
