@@ -5,13 +5,23 @@
 
 ## Installation
 1. Clone this repo
-2. Add to `.bash_profile` (replacing `<REPO>` with the location of this repository):
+2. Add to shell config (replacing `<REPO>` with the location of this repository):
 
-	   source "<REPO>/bash_prompt"
 	   export PATH="<REPO>:$PATH"
 
-3. Run `git config --global include.path "$PWD/gitconfig"` to get the gitconfig options
+2. Run `git config --global include.path "$PWD/gitconfig"` to get the gitconfig options
 
 ## General Bash knowledge
-https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself
+Getting the script directory
+<https://stackoverflow.com/a/67149152>
+```
+SCRIPT_DIR=$(
+    export CDPATH=''
+    cd -- "$(dirname -- "$BASH_SOURCE")" &>/dev/null
+    cd -P -- "$(dirname -- "$(readlink -- "$BASH_SOURCE" || echo .)")" &>/dev/null
+    pwd
+)
+```
 
+## Links
+<https://github.com/dikiaap/dotfiles/blob/master/.oh-my-zsh/themes/oxide.zsh-theme>
