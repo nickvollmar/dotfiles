@@ -1,0 +1,13 @@
+// Settings in here override those in "Default/Preferences.sublime-settings",
+// and are overridden in turn by syntax-specific settings.
+{
+	"font_face": "Monaco",
+	"font_size": 17,
+
+	// https://forum.sublimetext.com/t/request-mac-use-selection-for-find/5426/2
+	"find_selected_text": true,
+
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"ensure_newline_at_eof_on_save": true,
+}

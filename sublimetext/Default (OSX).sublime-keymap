@@ -1,0 +1,4 @@
+[
+	{ "keys": ["super+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["super+down"], "command": "select_lines", "args": {"forward": true} },
+]
