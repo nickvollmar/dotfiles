@@ -9,7 +9,11 @@
 
 	   export PATH="<REPO>:$PATH"
 
-2. Run `git config --global include.path "$PWD/gitconfig"` to get the gitconfig options
+3. "Install" the git options:
+```
+git config --global include.path "$PWD/gitconfig"
+git config --global core.excludesFile "$PWD/gitignore_global"
+```
 
 ## General Bash knowledge
 Getting the script directory

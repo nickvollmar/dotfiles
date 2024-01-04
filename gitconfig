@@ -1,3 +1,5 @@
+[user]
+    name = Nick Vollmar
 [alias]
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     com = !gitcom.sh
@@ -12,3 +14,5 @@
     rhom = reset --hard origin/HEAD
     rs = restore --staged
     fixup = !git add -u && git commit --amend --no-edit && git push --force origin HEAD
+[url "git@github.com:"]
+    insteadOf = https://github.com/
