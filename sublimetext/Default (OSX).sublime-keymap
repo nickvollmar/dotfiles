@@ -1,4 +1,5 @@
 [
 	{ "keys": ["super+up"], "command": "select_lines", "args": {"forward": false} },
 	{ "keys": ["super+down"], "command": "select_lines", "args": {"forward": true} },
+	{ "keys": ["super+r"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 ]

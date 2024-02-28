@@ -25,5 +25,8 @@ while git rev-parse -q --verify "$alt" >/dev/null; do
   alt="${alt}-alt"
 done
 
-echoval git checkout -b "$alt"
-echoval git checkout "$orig_branch"
+(
+  set -x
+  git checkout -b "$alt"
+  git checkout "$orig_branch"
+)
